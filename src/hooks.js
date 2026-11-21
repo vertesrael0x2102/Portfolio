@@ -36,20 +36,26 @@ export function useReveal() {
 export function useScrollState(ids) {
   const [state, setState] = useState({ current: null, far: false });
   useEffect(() => {
+    let frame = 0;
     function onScroll() {
-      const line = window.innerHeight * 0.4;
-      let current = null;
-      ids.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= line) current = id;
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const line = window.innerHeight * 0.4;
+        let current = null;
+        ids.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= line) current = id;
+        });
+        const far = window.scrollY > 700;
+        setState((s) => (s.current === current && s.far === far ? s : { current, far }));
       });
-      const far = window.scrollY > 700;
-      setState((s) => (s.current === current && s.far === far ? s : { current, far }));
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     onScroll();
     return () => {
+      if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };

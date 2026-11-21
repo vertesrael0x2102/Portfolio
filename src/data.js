@@ -30,6 +30,7 @@ export const sections = [
   { id: "timeline", label: "Timeline" },
   { id: "certificates", label: "Certificates" },
   { id: "skills", label: "Skills" },
+  { id: "tools", label: "Tools" },
   { id: "find", label: "Find me" },
   { id: "contact", label: "Contact" },
 ];
@@ -92,6 +93,17 @@ export const skills = [
   { tab: "Web", text: "HTML, CSS, JavaScript, basic React" },
   { tab: "Analysis", text: "AI training, algorithms and problem solving, attention to detail" },
   { tab: "Support", text: "Hardware diagnostics, software installation, system optimization, operating systems" },
+];
+
+// Update these with the software you use regularly.
+export const tools = [
+  { name: "Visual Studio Code", category: "Development", description: "Writing and editing code." },
+  { name: "GitHub", category: "Development", description: "Managing projects and sharing code." },
+  { name: "Cisco Packet Tracer", category: "Networking", description: "Building and testing network topologies." },
+  { name: "Microsoft Excel", category: "Data analysis", description: "Organizing data and working with spreadsheets." },
+  { name: "Python", category: "Programming", description: "Scripting, data work and automation." },
+  { name: "GeoJSON", category: "Geospatial data", description: "Representing geographic features and route data in a lightweight format." },
+  { name: "My Google Drive", category: "Resources", description: "Open my shared software and resources folder.", href: "https://drive.google.com/drive/folders/11Y7vh8tH2PcgahapHzcJlb8M-VGa4wE5?usp=sharing" },
 ];
 
 // Change the second text to your username if you want it shown under the platform name.

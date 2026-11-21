@@ -124,6 +124,16 @@ h2 { font: 700 clamp(2.3rem, 6.4vw, 4rem)/1 var(--px); letter-spacing: -0.01em; 
 .tab[aria-selected="true"] { background: var(--blue); color: #fff; box-shadow: var(--sh); }
 .panel { font: 700 clamp(1.4rem, 3.4vw, 2.2rem)/1.2 var(--px); max-width: 46rem; min-height: 5.5rem; border-top: 3px solid var(--ink); padding-top: 22px; }
 
+/* tools */
+.tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; list-style: none; margin: 0; padding: 0; }
+.tools li { min-width: 0; }
+.tools .tool-card { display: block; height: 100%; color: inherit; text-decoration: none; transition: transform .12s steps(2), box-shadow .12s steps(2), background .12s steps(2); }
+.tools .tool-card:hover { transform: translate(-3px, -3px); box-shadow: 7px 7px 0 var(--blue); background: var(--gold); }
+.tools .tool-card:hover p { color: var(--ink); }
+.tool-category { display: inline-block; font: 400 10px var(--label); letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+.tools h3 { font: 700 1.25rem/1.2 var(--px); margin: 0 0 8px; overflow-wrap: anywhere; }
+.tools p { margin: 0; color: var(--muted); }
+
 /* contact */
 .contact { margin-top: 84px; background: var(--ink); color: var(--paper); border-block: 3px solid var(--ink); padding-block: 64px 72px; }
 .contact .kicker::before { background: var(--gold); border-color: var(--paper); }

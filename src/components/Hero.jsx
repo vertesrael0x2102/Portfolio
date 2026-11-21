@@ -45,14 +45,17 @@ function PixelPhoto() {
   useEffect(() => {
     const cv = canvasRef.current, img = imgRef.current, ctx = cv.getContext("2d");
     const W = cv.width, H = cv.height, reduce = prefersReducedMotion();
+    // Reuse one small surface for every pixelation step instead of allocating a
+    // new canvas ten times per play-through.
+    const small = document.createElement("canvas");
+    const smallCtx = small.getContext("2d");
 
     function draw(block) {
       ctx.clearRect(0, 0, W, H);
       if (block <= 1) { ctx.imageSmoothingEnabled = true; ctx.drawImage(img, 0, 0, W, H); return; }
       const sw = Math.max(1, Math.round(W / block)), sh = Math.max(1, Math.round(H / block));
-      const small = document.createElement("canvas");
       small.width = sw; small.height = sh;
-      small.getContext("2d").drawImage(img, 0, 0, sw, sh);
+      smallCtx.drawImage(img, 0, 0, sw, sh);
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(small, 0, 0, sw, sh, 0, 0, W, H);
     }

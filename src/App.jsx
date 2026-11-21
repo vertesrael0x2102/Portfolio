@@ -8,6 +8,7 @@ import About from "./components/About";
 import Timeline from "./components/Timeline";
 import Certificates from "./components/Certificates";
 import Skills from "./components/Skills";
+import Tools from "./components/Tools";
 import FindMe from "./components/FindMe";
 import Contact from "./components/Contact";
 
@@ -41,6 +42,7 @@ export default function App() {
         <Timeline />
         <Certificates />
         <Skills />
+        <Tools />
         <FindMe />
       </main>
       <Contact say={say} />
