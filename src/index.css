@@ -176,3 +176,11 @@ h2 { font: 700 clamp(2.3rem, 6.4vw, 4rem)/1 var(--px); letter-spacing: -0.01em; 
 @media (hover: none) { .peek { display: none; } }
 .tlink { font: 400 12px var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--blue); text-underline-offset: 4px; text-decoration-thickness: 2px; }
 .openTo { margin: 0 0 14px; font-size: 18px; max-width: 34rem; }
+.finds { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.finds a { display: flex; align-items: center; gap: 14px; padding: 14px 16px; text-decoration: none; background: var(--paper); border: 3px solid var(--ink); transition: transform .12s steps(2), box-shadow .12s steps(2), background .12s steps(2); }
+.finds a:hover { transform: translate(-3px, -3px); box-shadow: var(--sh); background: var(--gold); }
+.finds svg { flex: none; }
+.finds span { min-width: 0; }
+.finds b { display: block; font: 700 18px var(--px); }
+.finds small { display: block; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.finds a:hover small { color: var(--ink); }

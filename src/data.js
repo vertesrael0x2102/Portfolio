@@ -30,6 +30,7 @@ export const sections = [
   { id: "timeline", label: "Timeline" },
   { id: "certificates", label: "Certificates" },
   { id: "skills", label: "Skills" },
+  { id: "find", label: "Find me" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -91,4 +92,13 @@ export const skills = [
   { tab: "Web", text: "HTML, CSS, JavaScript, basic React" },
   { tab: "Analysis", text: "AI training, algorithms and problem solving, attention to detail" },
   { tab: "Support", text: "Hardware diagnostics, software installation, system optimization, operating systems" },
+];
+
+// Change the second text to your username if you want it shown under the platform name.
+export const socials = [
+  { name: "Discord", handle: "View profile", href: "https://discord.com/users/796950556451012631" },
+  { name: "Steam", handle: "View profile", href: "https://steamcommunity.com/profiles/76561198351689475/" },
+  { name: "Facebook", handle: "Generux00", href: "https://www.facebook.com/Generux00" },
+  { name: "Instagram", handle: "@isreaaaaaal", href: "https://www.instagram.com/isreaaaaaal/" },
+  { name: "Roblox", handle: "View profile", href: "https://www.roblox.com/users/11438895087/profile" },
 ];

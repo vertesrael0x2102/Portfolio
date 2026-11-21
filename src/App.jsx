@@ -8,6 +8,7 @@ import About from "./components/About";
 import Timeline from "./components/Timeline";
 import Certificates from "./components/Certificates";
 import Skills from "./components/Skills";
+import FindMe from "./components/FindMe";
 import Contact from "./components/Contact";
 
 const sectionIds = sections.map((s) => s.id);
@@ -40,6 +41,7 @@ export default function App() {
         <Timeline />
         <Certificates />
         <Skills />
+        <FindMe />
       </main>
       <Contact say={say} />
       <a className={far ? "up on" : "up"} href="#top" aria-label="Back to top" onClick={scrollToTop}>&uarr;</a>
