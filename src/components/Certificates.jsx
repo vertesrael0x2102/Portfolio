@@ -23,7 +23,7 @@ export default function Certificates() {
         {shown.map((c) => (
           <li key={c.name} data-g={c.group} {...handlers(c.badge, 140)}>
             <span className="bd">
-              {c.badge && <img src={c.badge} alt={`Cisco Networking Academy verified badge: ${c.name}`} width="56" height="56" />}
+              {c.badge && <img src={c.badgeSmall} alt={`Cisco Networking Academy verified badge: ${c.name}`} width="56" height="56" />}
             </span>
             <b>{c.tag}</b>
             <span className="nm">

@@ -36,9 +36,10 @@ function useRain(canvasRef, spaceRef) {
     const footer = canvas.parentElement;
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     const reduce = prefersReducedMotion();
-    let raf = 0, visible = true, stopped = false;
+    let raf = 0, visible = true, stopped = false, running = false;
     let W = 0, H = 0, cell = 5, cols = 0, rows = 0;
     let glyph = new Uint8Array(0);
+    let word = null; // the name, drawn once and copied onto the canvas every frame
     let dots = [];
     let last = 0, spawnAcc = 0;
     const occupied = new Map(); // "col,row" -> true while a dot rests there
@@ -60,15 +61,17 @@ function useRain(canvasRef, spaceRef) {
       cols = Math.ceil(W / cell);
       rows = Math.ceil(H / cell);
 
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = "#F8FAFC";
-      ctx.textBaseline = "alphabetic";
-      ctx.font = `700 ${size}px "Pixelify Sans", "Courier New", monospace`;
-      const baseline = H + size * 0.1;
-      ctx.fillText(WORD, 0, baseline);
+      word = document.createElement("canvas");
+      word.width = W;
+      word.height = H;
+      const wctx = word.getContext("2d", { willReadFrequently: true });
+      wctx.fillStyle = "#F8FAFC";
+      wctx.textBaseline = "alphabetic";
+      wctx.font = `700 ${size}px "Pixelify Sans", "Courier New", monospace`;
+      wctx.fillText(WORD, 0, H + size * 0.1);
 
       // remember which grid cells are covered by a letter
-      const px = ctx.getImageData(0, 0, W, H).data;
+      const px = wctx.getImageData(0, 0, W, H).data;
       glyph = new Uint8Array(cols * rows);
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
@@ -85,8 +88,8 @@ function useRain(canvasRef, spaceRef) {
 
 
     function step(now) {
+      if (!visible) { running = false; return; }
       raf = requestAnimationFrame(step);
-      if (!visible) { last = now; return; }
       const dt = Math.min(64, now - last || 16);
       last = now;
 
@@ -132,7 +135,7 @@ function useRain(canvasRef, spaceRef) {
 
     function render() {
       ctx.clearRect(0, 0, W, H);
-      drawWord();
+      ctx.drawImage(word, 0, 0);
       dots.forEach((d) => {
         const left = 1 - Math.min(1, Math.max(0, (d.rest - (d.ttl - 800)) / 800));
         ctx.globalAlpha = d.rest ? left : 1;
@@ -142,34 +145,40 @@ function useRain(canvasRef, spaceRef) {
       ctx.globalAlpha = 1;
     }
 
-    function drawWord() {
-      const probe = ctx;
-      probe.font = '700 100px "Pixelify Sans", "Courier New", monospace';
-      const natural = probe.measureText(WORD).width || 1;
-      const size = (100 * W) / natural;
-      ctx.font = `700 ${size}px "Pixelify Sans", "Courier New", monospace`;
-      ctx.fillStyle = "#F8FAFC";
-      ctx.fillText(WORD, 0, H + size * 0.1);
+    function loop() {
+      if (running) return;
+      running = true;
+      last = performance.now();
+      raf = requestAnimationFrame(step);
     }
 
     function start() {
       cancelAnimationFrame(raf);
       layout();
       render();
-      if (!reduce) { last = performance.now(); raf = requestAnimationFrame(step); }
+      if (!reduce) loop();
     }
 
-    const ready = document.fonts && document.fonts.load ? document.fonts.load('700 100px "Pixelify Sans"').catch(() => {}) : Promise.resolve();
-    ready.then(() => { if (!stopped) start(); });
+    // Nothing here runs until the footer is first scrolled near, so it never slows the first load.
+    let started = false;
+    function begin() {
+      started = true;
+      const ready = document.fonts && document.fonts.load ? document.fonts.load('700 100px "Pixelify Sans"').catch(() => {}) : Promise.resolve();
+      ready.then(() => { if (!stopped) start(); });
+    }
 
     let resizeTimer = 0;
     const onResize = () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => { if (!stopped) start(); }, 150);
+      resizeTimer = setTimeout(() => { if (!stopped && started) start(); }, 150);
     };
     window.addEventListener("resize", onResize);
 
-    const io = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; });
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !started) begin();
+      else if (visible && started && !reduce && glyph.length) loop();
+    }, { rootMargin: "300px 0px" });
     io.observe(footer);
 
     return () => {

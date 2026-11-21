@@ -1,3 +1,7 @@
+import ccnaIntroSmall from "./assets/badges/small/ccna-intro.webp";
+import ccnaSwitchingSmall from "./assets/badges/small/ccna-switching.webp";
+import ccnaEnterpriseSmall from "./assets/badges/small/ccna-enterprise.webp";
+import cyberThreatSmall from "./assets/badges/small/cyber-threat-management.webp";
 import ccnaIntro from "./assets/badges/ccna-intro.webp";
 import ccnaSwitching from "./assets/badges/ccna-switching.webp";
 import ccnaEnterprise from "./assets/badges/ccna-enterprise.webp";
@@ -17,7 +21,7 @@ export const profile = {
   github: "https://github.com/vertesrael0x2102",
   githubName: "vertesrael0x2102",
   linkedin: "https://www.linkedin.com/in/vert-esrael-gumera-10669a429/",
-  openTo: "Open to IT, cybersecurity or any tech related works, in Iligan City or remote.",
+  openTo: "Open to IT, cybersecurity and data roles, in Iligan City or remote.",
   intro:
     "I work in information technology, with experience in data analysis, cybersecurity and project management. I like making systems run more efficiently and keeping data accurate.",
   about:
@@ -73,11 +77,11 @@ export const timeline = [
 
 // group is the filter it belongs to. Leave badge and file out when you don't have them.
 export const certs = [
-  { group: "ccna", tag: "CCNA", name: "Introduction to Networks", date: "May 2025", badge: ccnaIntro, file: "certificates/ccna-intro.pdf" },
-  { group: "ccna", tag: "CCNA", name: "Switching, Routing, and Wireless Essentials", date: "Dec 2024", badge: ccnaSwitching, file: "certificates/ccna-switching.pdf" },
-  { group: "ccna", tag: "CCNA", name: "Enterprise Networking, Security, and Automation", date: "Dec 2025", badge: ccnaEnterprise, file: "certificates/ccna-enterprise.pdf" },
+  { group: "ccna", tag: "CCNA", name: "Introduction to Networks", date: "May 2025", badge: ccnaIntro, badgeSmall: ccnaIntroSmall, file: "certificates/ccna-intro.pdf" },
+  { group: "ccna", tag: "CCNA", name: "Switching, Routing, and Wireless Essentials", date: "Dec 2024", badge: ccnaSwitching, badgeSmall: ccnaSwitchingSmall, file: "certificates/ccna-switching.pdf" },
+  { group: "ccna", tag: "CCNA", name: "Enterprise Networking, Security, and Automation", date: "Dec 2025", badge: ccnaEnterprise, badgeSmall: ccnaEnterpriseSmall, file: "certificates/ccna-enterprise.pdf" },
   { group: "security", tag: "Security", name: "Introduction to Cybersecurity" },
-  { group: "security", tag: "Security", name: "Cyber Threat Management", date: "Jun 2025", badge: cyberThreat, file: "certificates/cyber-threat-management.pdf" },
+  { group: "security", tag: "Security", name: "Cyber Threat Management", date: "Jun 2025", badge: cyberThreat, badgeSmall: cyberThreatSmall, file: "certificates/cyber-threat-management.pdf" },
   { group: "response", tag: "Response", name: "Computer Emergency Response Team Training" },
 ];
 
