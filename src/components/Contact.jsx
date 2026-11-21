@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { profile } from "../data";
+import Footer from "./Footer";
 
 export default function Contact({ say }) {
   const mailRef = useRef(null);
@@ -37,7 +38,7 @@ export default function Contact({ say }) {
           </div>
         </div>
       </section>
-      <div className="in foot">{profile.fullName}, Iligan City</div>
+      <Footer />
     </>
   );
 }

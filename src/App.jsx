@@ -10,7 +10,7 @@ import Certificates from "./components/Certificates";
 import Skills from "./components/Skills";
 import Tools from "./components/Tools";
 import FindMe from "./components/FindMe";
-import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 const sectionIds = sections.map((s) => s.id);
 
@@ -45,7 +45,7 @@ export default function App() {
         <Tools />
         <FindMe />
       </main>
-      <Contact say={say} />
+      <Footer say={say} />
       <a className={far ? "up on" : "up"} href="#top" aria-label="Back to top" onClick={scrollToTop}>&uarr;</a>
       <div className={toast ? "toast on" : "toast"} role="status">{toast}</div>
     </>
