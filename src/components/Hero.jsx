@@ -107,13 +107,14 @@ export default function Hero() {
     <section className="hero">
       <div className="in">
         <div>
-          <p className="stamp">{profile.place}</p>
+          <p className="stamp">Portfolio &middot; {profile.place}</p>
           <Typed lines={lines} />
           <p className="intro">{profile.intro}</p>
           <div className="go">
             <a className="btn blue" href="#contact">Say hi</a>
             <a className="btn gold" href="/Vert_Esrael_Gumera_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
             <a className="btn" href={profile.github}>GitHub</a>
+            <a className="btn" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
         </div>
         <div className="side">

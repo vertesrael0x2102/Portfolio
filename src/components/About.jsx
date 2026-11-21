@@ -15,6 +15,7 @@ export default function About() {
           <div><dt>Location</dt><dd>{profile.place}</dd></div>
           <div><dt>Education</dt><dd>BS Information Technology</dd></div>
           <div><dt>GitHub</dt><dd><a href={profile.github}>{profile.githubName}</a></dd></div>
+          <div><dt>LinkedIn</dt><dd><a href={profile.linkedin} target="_blank" rel="noreferrer">vert-esrael-gumera</a></dd></div>
         </dl>
       </div>
     </section>

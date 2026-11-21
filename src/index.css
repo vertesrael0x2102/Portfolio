@@ -174,3 +174,5 @@ h2 { font: 700 clamp(2.3rem, 6.4vw, 4rem)/1 var(--px); letter-spacing: -0.01em; 
 .peek.on { opacity: 1; }
 .peek img { display: block; max-width: 70vw; height: auto; }
 @media (hover: none) { .peek { display: none; } }
+.tlink { font: 400 12px var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--blue); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.openTo { margin: 0 0 14px; font-size: 18px; max-width: 34rem; }

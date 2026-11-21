@@ -16,6 +16,8 @@ export const profile = {
   email: "vertesraelg@gmail.com",
   github: "https://github.com/vertesrael0x2102",
   githubName: "vertesrael0x2102",
+  linkedin: "https://www.linkedin.com/in/vert-esrael-gumera-10669a429/",
+  openTo: "Open to IT, cybersecurity and data roles, in Iligan City or remote.",
   intro:
     "I work in information technology, with experience in data analysis, cybersecurity and project management. I like making systems run more efficiently and keeping data accurate.",
   about:
@@ -45,6 +47,7 @@ export const timeline = [
   { year: "2022", kind: "edu", label: "Education", title: "Started BS Information Technology", text: profile.school },
   {
     year: "2024", kind: "proj", label: "Project", image: therapyImg,
+    link: { href: "https://github.com/vertesrael0x2102/Artificial-Intelligence-Project-Understanding-Factors-Influencing-the-Decision-to-Undergo-Therapy", label: "View on GitHub" },
     title: "Artificial Intelligence Project: Understanding Factors Influencing the Decision to Undergo Therapy",
     text: "I analyzed complex datasets with AI techniques to find the factors that influence a person's decision to start therapy, which points to ways of improving patient engagement.",
   },

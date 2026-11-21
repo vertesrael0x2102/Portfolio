@@ -28,10 +28,12 @@ export default function Contact({ say }) {
         <div className="in">
           <p className="kicker rv">Contact</p>
           <h2 className="rv">Say hi.</h2>
+          <p className="rv openTo">{profile.openTo}</p>
           <p className="mail rv" ref={mailRef}>{profile.email}</p>
           <div className="row rv">
             <button className="btn gold" type="button" onClick={copy}>Copy email</button>
             <a className="plain" href={profile.github}>github.com/{profile.githubName}</a>
+            <a className="plain" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
         </div>
       </section>

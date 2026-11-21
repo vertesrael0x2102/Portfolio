@@ -16,6 +16,7 @@ export default function Timeline() {
               <h3>{t.title}</h3>
               {t.sub && <p className="sub">{t.sub}</p>}
               {t.text && <p>{t.text}</p>}
+              {t.link && <p><a className="tlink" href={t.link.href} target="_blank" rel="noreferrer">{t.link.label}</a></p>}
               {t.bullets && <ul>{t.bullets.map((b) => <li key={b}>{b}</li>)}</ul>}
             </div>
           </li>
