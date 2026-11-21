@@ -28,7 +28,7 @@ const WORD = "VERT ESRAEL";
 const DOT_COLORS = ["#F4B400", "#2B4DE8", "#E5484D", "#8B5CF6", "#F8FAFC"];
 
 // Draws the big name and rains square dots on it. A dot stops when it lands on a letter
-// (or on another dot), stays a few seconds, then drops again once what held it up is gone.
+// (or on another dot), slides down steps like sand, piles up in the dips, and fades after a while.
 function useRain(canvasRef, spaceRef) {
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -57,7 +57,7 @@ function useRain(canvasRef, spaceRef) {
       const dpr = 1;
       canvas.width = W * dpr;
       canvas.height = H * dpr;
-      cell = Math.max(5, Math.round(W / 170));
+      cell = Math.max(3, Math.round(W / 320));
       cols = Math.ceil(W / cell);
       rows = Math.ceil(H / cell);
 
@@ -93,11 +93,10 @@ function useRain(canvasRef, spaceRef) {
       const dt = Math.min(64, now - last || 16);
       last = now;
 
-      spawnAcc += dt * (W / 120000); // about 10 new dots a second on a wide screen
+      spawnAcc += dt * (W / 60000); // roughly 20 new dots a second on a wide screen
       while (spawnAcc >= 1) {
         spawnAcc -= 1;
-        const c = Math.floor(rand() * cols);
-        dots.push({ c, r: -1, color: DOT_COLORS[Math.floor(rand() * DOT_COLORS.length)], wait: 0, speed: 50 + rand() * 50, rest: 0, ttl: 3500 + rand() * 4000 });
+        dots.push({ c: Math.floor(rand() * cols), r: -1, color: DOT_COLORS[Math.floor(rand() * DOT_COLORS.length)], wait: 0, speed: 16 + rand() * 30, rest: 0, ttl: 12000 + rand() * 18000 });
       }
 
       for (let i = dots.length - 1; i >= 0; i--) {
@@ -107,25 +106,31 @@ function useRain(canvasRef, spaceRef) {
           if (d.rest > d.ttl) {
             occupied.delete(d.c + "," + d.r);
             dots.splice(i, 1);
-            continue;
-          }
-          // if what held it up is gone, it starts falling again
-          if (!solid(d.c, d.r + 1) && d.r + 1 < rows) {
+          } else if (!solid(d.c, d.r + 1) && d.r + 1 < rows) {
+            // what held it up is gone, so it falls again
             occupied.delete(d.c + "," + d.r);
             d.rest = 0;
+            d.wait = 0;
           }
           continue;
         }
         d.wait += dt;
-        while (d.wait >= d.speed) {
+        while (d.wait >= d.speed && !d.rest) {
           d.wait -= d.speed;
-          if (solid(d.c, d.r + 1)) {
-            d.rest = 1;
-            occupied.set(d.c + "," + d.r, true);
-            break;
+          if (!solid(d.c, d.r + 1)) {
+            d.r += 1;
+          } else {
+            // blocked underneath: slide down a step like sand, otherwise settle here
+            const dirs = rand() < 0.5 ? [-1, 1] : [1, -1];
+            const side = dirs.find((s) => !solid(d.c + s, d.r + 1) && !solid(d.c + s, d.r) && d.c + s >= 0 && d.c + s < cols);
+            if (side !== undefined) {
+              d.c += side;
+              d.r += 1;
+            } else {
+              d.rest = 1;
+              occupied.set(d.c + "," + d.r, true);
+            }
           }
-          d.r += 1;
-          d.speed = Math.max(28, d.speed * 0.985); // gets quicker as it falls
         }
         if (d.r > rows) dots.splice(i, 1);
       }
@@ -137,10 +142,9 @@ function useRain(canvasRef, spaceRef) {
       ctx.clearRect(0, 0, W, H);
       ctx.drawImage(word, 0, 0);
       dots.forEach((d) => {
-        const left = 1 - Math.min(1, Math.max(0, (d.rest - (d.ttl - 800)) / 800));
-        ctx.globalAlpha = d.rest ? left : 1;
+        ctx.globalAlpha = d.rest ? 1 - Math.min(1, Math.max(0, (d.rest - (d.ttl - 800)) / 800)) : 1;
         ctx.fillStyle = d.color;
-        ctx.fillRect(d.c * cell, d.r * cell, cell - 1, cell - 1);
+        ctx.fillRect(d.c * cell, d.r * cell, cell, cell);
       });
       ctx.globalAlpha = 1;
     }
