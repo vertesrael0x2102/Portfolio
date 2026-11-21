@@ -107,7 +107,7 @@ export default function Hero() {
     <section className="hero">
       <div className="in">
         <div>
-          <p className="stamp">Portfolio &middot; {profile.place}</p>
+          <p className="stamp">{profile.place}</p>
           <Typed lines={lines} />
           <p className="intro">{profile.intro}</p>
           <div className="go">
