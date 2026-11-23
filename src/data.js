@@ -23,9 +23,9 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/vert-esrael-gumera-10669a429/",
   openTo: "Open to IT, cybersecurity and data roles, in Iligan City or remote.",
   intro:
-    "I work in information technology, with experience in data analysis, cybersecurity and project management. I like making systems run more efficiently and keeping data accurate.",
+    "Fresh IT graduate specializing in Network Systems, with knowledge of networking, TCP/IP, subnetting, VLANs, OSPF, and STP. Interested in cybersecurity, Linux, network troubleshooting, and building efficient systems.",
   about:
-    "I'm a BSIT graduate from MSU-IIT. I've worked on AI data analysis, route optimization and cybersecurity awareness, and I like work where the details matter.",
+    "I'm a BSIT graduate majoring in Network Systems from MSU-IIT. I have a background in Cisco networking, cybersecurity, and technical troubleshooting, with project experience in route optimization, web development, and data analysis. I'm always looking to expand my skills and explore new technologies.",
   school: "Mindanao State University - Iligan Institute of Technology, Iligan City.",
 };
 
